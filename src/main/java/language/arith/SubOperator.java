@@ -14,9 +14,7 @@ public class SubOperator extends BinaryOperator<Integer> {
      */
     @Override
     public Operand<Integer> performOperation() {
-        // TODO: Follow the example from PlusOperator to override
-        //   this method (from the version in BinaryOperator)
-        //   for subtraction.
+        Operand<Integer> op0 = this.getOp1();
         return null;
     }
 }
