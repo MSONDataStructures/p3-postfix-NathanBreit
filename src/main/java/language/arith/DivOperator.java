@@ -14,10 +14,12 @@ public class DivOperator extends BinaryOperator<Integer> {
      */
     @Override
     public Operand<Integer> performOperation() {
-        // TODO: Follow the example from PlusOperator to override
-        //   this method (from the version in BinaryOperator)
-        //   for division.
-        return null;
+        Operand<Integer> op0 = this.getOp0();
+        Operand<Integer> op1 = this.getOp1();
+        if (op0 == null || op1 == null) throw new IllegalStateException("Could not perform operation prior to operands being set.");
+        if (op1.getValue() == 0) throw new IllegalStateException("Operator should not allow the denominator to be set to zero");
+        Integer returnValue = (Integer) op0.getValue() / op1.getValue();
+        return new Operand<>(returnValue);
     }
 
     /**
