@@ -17,7 +17,6 @@ public class DivOperator extends BinaryOperator<Integer> {
         Operand<Integer> op0 = this.getOp0();
         Operand<Integer> op1 = this.getOp1();
         if (op0 == null || op1 == null) throw new IllegalStateException("Could not perform operation prior to operands being set.");
-        if (op1.getValue() == 0) throw new IllegalStateException("Operator should not allow the denominator to be set to zero");
         Integer returnValue = (Integer) op0.getValue() / op1.getValue();
         return new Operand<>(returnValue);
     }
@@ -27,8 +26,9 @@ public class DivOperator extends BinaryOperator<Integer> {
      */
     @Override
     public void setOperand(int i, Operand<Integer> operand) {
-        // TODO: For division we need to additionally override
-        //  the setOperand method to check for division by zero.
-        //  See DivOperatorTest (and the README) for usage.
+        if (i == 1 && operand.getValue() == 0) {
+            throw new IllegalStateException("Operator should not allow the denominator to be set to zero");
+        }
+        super.setOperand(i, operand);
     }
 }
